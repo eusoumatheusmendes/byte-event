@@ -79,20 +79,34 @@ public class Event implements Comparable<Event>{
                 '}';
     }
 
+    /**
+     * Método equals sobrescrito para comparar eventos e retornar igualdade caso os eventos possuem
+     * as mesmas datas e horários
+     * @param referencia
+     * @return
+     */
     @Override
     public boolean equals(Object referencia) {
         Event evento = (Event) referencia;
         return this.horario == evento.getHorario() && this.local == evento.getLocal();
     }
 
+    /**
+     * Método sobrescrito da interface Comparable que faz a comparação dos eventos por suas
+     * datas e, consequentemente, a lista de eventos pode ser retornada com base nos eventos com datas
+     * mais próximas
+     * @param event
+     * @return
+     */
     @Override
-    public int compareTo(Event o) {
-        return LocalDate.MIN.compareTo(o.getData());
+    public int compareTo(Event event) {
+        return LocalDate.MIN.compareTo(event.getData());
     }
 
     public boolean haVagasDisponiveis(){
         if(this.quantidadeDeVagas <= this.totalDeInscritos){
-            throw new VagaIndisponivelException("Este evento não possui mais vagas.");
+            throw new VagaIndisponivelException("Este evento não possui mais vagas. " +
+                    "Veja nossos outros eventos disponíveis.");
         }
         return true;
     }
@@ -107,4 +121,7 @@ public class Event implements Comparable<Event>{
         return this.getQuantidadeDeVagas() - this.totalDeInscritos;
     }
 
+    public List<Participant> getParticipantes() {
+        return participantes;
+    }
 }

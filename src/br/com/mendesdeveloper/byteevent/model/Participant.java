@@ -27,6 +27,10 @@ public class Participant {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Participante{" +
@@ -38,6 +42,6 @@ public class Participant {
     @Override
     public boolean equals(Object referencia) {
         Participant participante = (Participant) referencia;
-        return this.cpf == participante.getCpf() || this.email == participante.getEmail();
+        return this.cpf == participante.cpf || this.email == participante.email;
     }
 }
