@@ -3,7 +3,7 @@ package br.com.mendesdeveloper.byteevent.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Event {
+public class Event implements Comparable<Event>{
 
     private String descricao;
     private String local;
@@ -56,5 +56,10 @@ public class Event {
     public boolean equals(Object referencia) {
         Event evento = (Event) referencia;
         return this.horario == evento.getHorario() && this.local == evento.getLocal();
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return LocalDate.MIN.compareTo(o.getData());
     }
 }
