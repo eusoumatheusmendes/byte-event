@@ -1,6 +1,6 @@
 package br.com.mendesdeveloper.byteevent.model;
 
-public class Participante {
+public class Participant {
 
     private String nome;
     private String cpf;
@@ -37,7 +37,7 @@ public class Participante {
 
     @Override
     public boolean equals(Object referencia) {
-        Participante participante = (Participante) referencia;
+        Participant participante = (Participant) referencia;
         return this.cpf == participante.getCpf() || this.email == participante.getEmail();
     }
 }

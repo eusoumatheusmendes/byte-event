@@ -1,7 +1,11 @@
 package br.com.mendesdeveloper.byteevent.model;
 
+import br.com.mendesdeveloper.byteevent.regras.VagaIndisponivelException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Event implements Comparable<Event>{
 
@@ -9,6 +13,13 @@ public class Event implements Comparable<Event>{
     private String local;
     private LocalDate data;
     private LocalDateTime horario;
+    List<Participant> participantes;
+    private int quantidadeDeVagas;
+    private int totalDeInscritos;
+
+    public Event(){
+        this.participantes = new ArrayList<>();
+    }
 
     public String getDescricao() {
         return descricao;
@@ -42,6 +53,10 @@ public class Event implements Comparable<Event>{
         this.horario = horario;
     }
 
+    public int getTotalDeInscritos() {
+        return totalDeInscritos;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
@@ -61,5 +76,19 @@ public class Event implements Comparable<Event>{
     @Override
     public int compareTo(Event o) {
         return LocalDate.MIN.compareTo(o.getData());
+    }
+
+    public boolean haVagasDisponiveis(){
+        if(this.quantidadeDeVagas <= this.totalDeInscritos){
+            throw new VagaIndisponivelException("Este evento não possui mais vagas.");
+        }
+        return true;
+    }
+
+
+    public void inscrever(Participant participant){
+        this.haVagasDisponiveis();
+        this.participantes.add(participant);
+        this.totalDeInscritos++;
     }
 }
