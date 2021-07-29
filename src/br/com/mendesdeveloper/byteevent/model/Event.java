@@ -57,6 +57,18 @@ public class Event implements Comparable<Event>{
         return totalDeInscritos;
     }
 
+    public int getQuantidadeDeVagas() {
+        return quantidadeDeVagas;
+    }
+
+    public void setParticipantes(List<Participant> participantes) {
+        this.participantes = participantes;
+    }
+
+    public void setQuantidadeDeVagas(int quantidadeDeVagas) {
+        this.quantidadeDeVagas = quantidadeDeVagas;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
@@ -85,10 +97,14 @@ public class Event implements Comparable<Event>{
         return true;
     }
 
-
     public void inscrever(Participant participant){
         this.haVagasDisponiveis();
         this.participantes.add(participant);
         this.totalDeInscritos++;
     }
+
+    public int getQuantidadeDeVagasDisponivel(){
+        return this.getQuantidadeDeVagas() - this.totalDeInscritos;
+    }
+
 }

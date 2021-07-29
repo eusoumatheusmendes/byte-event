@@ -1,12 +1,10 @@
 package br.com.mendesdeveloper.byteevent.test;
 
 import br.com.mendesdeveloper.byteevent.model.Event;
+import br.com.mendesdeveloper.byteevent.model.Participant;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Test {
 
@@ -21,6 +19,7 @@ public class Test {
         event1.setData(agora);
         event1.setHorario(horarioAgora);
         event1.setDescricao("Aprofundando em Java");
+        event1.setQuantidadeDeVagas(2);
 
         LocalDate agora2 = LocalDate.now();
         LocalDateTime horarioAgora2 = LocalDateTime.now();
@@ -29,20 +28,19 @@ public class Test {
         event2.setHorario(horarioAgora2);
         event2.setDescricao("Fundamentos Java");
 
-        List<Event> eventos = new ArrayList<>();
-        eventos.add(event1);
-        eventos.add(event2);
+        Participant participant1 = new Participant();
+        participant1.setNome("Matheus Mendes");
+        participant1.setCpf("57689494");
 
-        System.out.println("Antes da ordenação dos eventos por data mais próxima");
-        for (Event event : eventos) {
-            System.out.println(event);
-        }
+        Participant participant2 = new Participant();
+        participant2.setNome("Maria");
+        participant2.setCpf("94857575");
 
-        System.out.println("Após ordenação dos eventos por data mais próxima");
-        Collections.sort(eventos);
-        for (Event event : eventos) {
-            System.out.println(event);
-        }
+        event1.inscrever(participant1);
+        event1.inscrever(participant2);
 
+        int quantidadeDeVagas = event1.getQuantidadeDeVagas();
+
+        System.out.println(event1.getQuantidadeDeVagasDisponivel());
     }
 }
